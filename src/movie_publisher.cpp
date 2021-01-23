@@ -9,17 +9,23 @@ int main(int argc, char** argv) {
 	ros::NodeHandle nh("~"); 
 
 	std::string name;
-	nh.getParam("videoName",name);
+	nh.getParam("video_name",name);
 
-	image_transport::ImageTransport it(nh);
-	image_transport::Publisher image_pub = it.advertise("color/image_raw", 10);
 	cv::Mat image;
 	cv::VideoCapture camera(name.c_str());
+	float flame_rate = camera.get(cv::CAP_PROP_FPS);
+
 	if (!camera.isOpened()) {
 		ROS_INFO("failed to open camera.");
 		return -1;
 	}
-	ros::Rate looprate (10); // capture image at 10Hz
+	ros::Rate looprate (flame_rate); // capture image at 10Hz
+	std::cout << flame_rate << std::endl;
+
+
+	image_transport::ImageTransport it(nh);
+	image_transport::Publisher image_pub = it.advertise("color/image_raw", flame_rate);
+	
 	while(ros::ok()) {
 		camera >> image;
 		sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image).toImageMsg();
@@ -29,3 +35,4 @@ int main(int argc, char** argv) {
 	}
 	return 0;
 }
+ 
