@@ -3,7 +3,7 @@ ROS1 package that publish of movie file and webcam
 
 ## Dependent
 
-- ROS1 Melodic
+- ROS1 Melodic・ROS1 Noetic
 - OpenCV3.2
 
 ## Installation
