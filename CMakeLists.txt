@@ -1,51 +1,59 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(movie_publisher)
 
-## Compile as C++11, supported in ROS Kinetic and newer
+set(CMAKE_CXX_STANDARD 14)
 
-## set Opencv library path
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
+# find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(image_transport REQUIRED)
+find_package(cv_bridge REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(example_interfaces REQUIRED)
+find_package(Boost REQUIRED)
+
+## Set PATH
 
 set(OpenCV_INCLUDE_DIRS)
 set(OpenCV_LIB_DIR)
-include_directories(${OpenCV_INCLUDE_DIRS})
 
-find_package(catkin REQUIRED COMPONENTS
-    cv_bridge
-    image_transport
-    roscpp
-    rospy
-    sensor_msgs
-    std_msgs
+set(RCL_PKG
+  rclcpp
+  image_transport
+  cv_bridge
+  sensor_msgs
+  example_interfaces
 )
 
-catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES webcam_publisher
-#  CATKIN_DEPENDS cv_bridge image_transport roscpp rospy sensor_msgs std_msgs
-#  DEPENDS system_lib
-)
-
-###########
-## Build ##
-###########
-
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
 include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
+  ${RECORD_BASE_INCLUDE}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/webcam_publisher.cpp
+## movie_pub -------------------------------
+
+add_executable(movie_pub
+  src/movie_publisher.cpp
+  ${RECORD_BASE_API}
+)
+
+ament_target_dependencies(movie_pub ${RCL_PKG})
+
+install(TARGETS
+  movie_pub
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+#### ---------------------------------
+
+# install(DIRECTORY
+#   launch/
+#   DESTINATION lib/${PROJECT_NAME}
 # )
 
-
-add_executable(webcam_pub src/webcam_publisher.cpp)
-add_executable(movie_pub src/movie_publisher.cpp)
-
-target_link_libraries(webcam_pub ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${OpenCV_LIBS})
-target_link_libraries(movie_pub ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${OpenCV_LIBS})
+ament_package()
