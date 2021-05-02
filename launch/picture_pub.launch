@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="movie_publisher" name="camera" type="picture_pub">
+    <param name="pictureName" value="/home/ubuntu/ros1_ws/src/movie_publisher/data/data3.png" />
+  </node>
+</launch>  
