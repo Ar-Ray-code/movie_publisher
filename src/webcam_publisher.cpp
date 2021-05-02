@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
 	ros::NodeHandle nh("~"); 
 
 	int camera_num;
-	nh.getParam("cameraNum",camera_num);
+	nh.getParam("camera_num",camera_num);
 
 	image_transport::ImageTransport it(nh);
 	image_transport::Publisher image_pub = it.advertise("color/image_raw", 10);

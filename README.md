@@ -15,12 +15,16 @@ ROS1 package that publish of movie file and webcam
 
 #### webcam_publisher
 
-- `$ rosrun movie_publisher webcam_pub 0 `
+- `$ rosrun movie_publisher webcam_pub _camera_name:=0 `
 - 0 is camera port ("/dev/video0")
 
 #### movie_publisher
 
-- `$ rosrun movie_publisher movie_pub <path to movie file>`
+- `$ rosrun movie_publisher movie_pub _video_name:=<path to movie file>`
+
+#### picture_publisher
+
+- `$ rosrun movie_publisher picture_pub <path to picture file>`
 
 #### picture_publisher
 
