@@ -3,8 +3,7 @@ ROS1 package that publish of movie file and webcam
 
 ## Dependent
 
-- ROS1 Melodic・ROS1 Noetic
-- OpenCV3.2
+
 
 ## Installation
 
@@ -24,4 +23,4 @@ ROS1 package that publish of movie file and webcam
 
 ## Licence
 
-- MIT : https://github.com/Ar-Ray-code/movie_publisher/blob/main/LICENSE
+
