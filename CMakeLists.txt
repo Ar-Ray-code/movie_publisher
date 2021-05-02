@@ -43,9 +43,10 @@ include_directories(
 #   src/${PROJECT_NAME}/webcam_publisher.cpp
 # )
 
-
 add_executable(webcam_pub src/webcam_publisher.cpp)
 add_executable(movie_pub src/movie_publisher.cpp)
+add_executable(picture_pub src/picture_publisher.cpp)
 
 target_link_libraries(webcam_pub ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${OpenCV_LIBS})
 target_link_libraries(movie_pub ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(picture_pub ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${OpenCV_LIBS})

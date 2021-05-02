@@ -26,6 +26,10 @@ ROS1 package that publish of movie file and webcam
 
 - `$ rosrun movie_publisher picture_pub <path to picture file>`
 
+#### picture_publisher
+
+- `$ rosrun movie_publisher picture_pub <path to picture file>`
+
 ## Licence
 
 - https://github.com/Ar-Ray-code/movie_publisher/blob/main/LICENSE
