@@ -2,7 +2,7 @@
 <package format="2">
   <name>movie_publisher</name>
   <version>0.0.0</version>
-  <description>ROS1 package that publish of movie file and webcam</description>
+
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
