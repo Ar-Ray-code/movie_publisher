@@ -14,8 +14,6 @@ find_package(image_transport REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(example_interfaces REQUIRED)
-find_package(Boost REQUIRED)
 
 ## Set PATH
 
@@ -27,7 +25,7 @@ set(RCL_PKG
   image_transport
   cv_bridge
   sensor_msgs
-  example_interfaces
+#  example_interfaces
 )
 
 include_directories(
