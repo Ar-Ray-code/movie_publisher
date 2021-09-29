@@ -1,6 +1,6 @@
 #include <rclcpp/rclcpp.hpp>
 #include <cv_bridge/cv_bridge.h>
-#include <image_transport/image_transport.h>
+#include <image_transport/image_transport.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 
@@ -11,21 +11,26 @@ class movie_pub : public rclcpp::Node
 	public:
 		std::shared_ptr<rclcpp::Node> param_get_node;
 		rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr image_pub;
-
 		sensor_msgs::msg::Image::SharedPtr msg;
-
 		std_msgs::msg::Header header;
-		// std::shared_ptr<sensor_msgs::msg::Image> image_pub;
 
 		std::string name;
-
+		int width;
+		int height;
 
 		movie_pub(const std::string &name_space, rclcpp::NodeOptions options):rclcpp::Node(name_space, options)
 		{
-
-			name = "/home/ubuntu/Desktop/video.mp4";
-
 			cv::Mat image;
+			// declare parameter
+			this->declare_parameter("video_name", "/home/ubuntu/Desktop/video.mp4");
+			this->declare_parameter("width", 640);
+			this->declare_parameter("height", 480);
+
+			// get parameter
+			name = this->get_parameter("video_name").as_string();
+			width = this->get_parameter("width").as_int();
+			height = this->get_parameter("height").as_int();
+
 			cv::VideoCapture camera(name.c_str());
 			
 			float flame_rate = camera.get(cv::CAP_PROP_FPS);
@@ -41,7 +46,7 @@ class movie_pub : public rclcpp::Node
 			while(rclcpp::ok())
 			{
 				camera >> image;
-				cv::resize(image, image,cv::Size(416, 234));
+				cv::resize(image, image,cv::Size(width,height));
 				
 				header.stamp = system_clock.now();
 				header.frame_id = "/map";

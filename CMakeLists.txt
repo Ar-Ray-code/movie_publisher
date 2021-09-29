@@ -47,6 +47,20 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+## movie_pub -------------------------------
+
+add_executable(webcam_pub
+  src/webcam_publisher.cpp
+  ${RECORD_BASE_API}
+)
+
+ament_target_dependencies(webcam_pub ${RCL_PKG})
+
+install(TARGETS
+  webcam_pub
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 #### ---------------------------------
 
 # install(DIRECTORY
