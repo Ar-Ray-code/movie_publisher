@@ -1,27 +1,36 @@
 # movie_publisher
-ROS1 package that publish of movie file and webcam
+ROS2 package that publish of movie file and webcam
 
 ## Dependent
 
-- ROS1 Melodic・ROS1 Noetic
-- OpenCV3.2
+- ROS2 Foxy
+- OpenCV4 (3 is OK)
 
 ## Installation
 
-- Place the folder in "ROS1 workspace / src".
-- cd .. && catkin_make
+```bash
+cd ~/
+mkdir -p ros2_ws/src
+cd ros2_ws/src
+git clone https://github.com/Ar-Ray-code/movie_publisher -b foxy
+cd ~/ros2_ws
+colcon build --symlink-install
+```
 
 ## Usage
 
 #### webcam_publisher
 
-- `$ rosrun movie_publisher webcam_pub _camera_name:=0 `
-- 0 is camera port ("/dev/video0")
+- `$ ros2 run movie_publisher webcam_pub`
+- device is `/dev/video2`
+  - `$ ros2 run movie_publisher webcam_pub --ros-args -p camera_num:=2`
+- w : 1920 h : 1080
+  - `$ ros2 run movie_publisher webcam_pub --ros-args -p width:=1920 -p height:=1080`
 
-#### movie_publisher
+#### movie_publisher (Not recommended)
 
-- `$ rosrun movie_publisher movie_pub _video_name:=<path to movie file>`
+- `$ rosrun movie_publisher movie_pub --ros-args -p video_name:=<path to movie file>`
 
 ## Licence
 
-- MIT : https://github.com/Ar-Ray-code/movie_publisher/blob/main/LICENSE
+- Apache License 2.0 : https://github.com/Ar-Ray-code/movie_publisher/blob/main/LICENSE
